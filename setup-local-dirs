@@ -15,3 +15,4 @@ fi
 
 rm -f /etc/profile.d/java-home.sh
 cp java-home.sh /etc/profile.d/java-home.sh
+chmod 755 /etc/profile.d/java-home.sh
