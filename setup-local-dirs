@@ -2,28 +2,52 @@
 
 mkdir -p tar
 
+GEN=6
+BITS=64
+
 BASE=http://download.oracle.com/otn-pub/java/jdk
 
-URL=$BASE/6u45-b06/jdk-6u45-linux-x64.bin
-FILE=`basename $URL`
-TGT=jdk1.6.0_45
+case "$GEN-$BITS" in
+	6-64)
+		URL=$BASE/6u45-b06/jdk-6u45-linux-x64.bin
+		FILE=`basename $URL`
+		TGT=jdk1.6.0_45
+		SUFFIX=""
+		;;
+	6-32)
+		URL=$BASE/6u45-b06/jdk-6u45-linux-i586.bin
+		FILE=`basename $URL`
+		TGT=jdk1.6.0_45
+		SUFFIX="-32bit"
+		;;
+	*)
+		echo "Undefined gen-bits."
+		exit 1
+		;;
+esac
 
 if [ ! -e tar/$FILE ]; then
 	wget --no-cookies --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com" \
 	$URL -O tar/$FILE
 fi
 
-if [ ! -e $TGT ]; then
+if [ ! -e "${TGT}${SUFFIX}" ]; then
 	unset DISPLAY
 	chmod 755 tar/$FILE
-	./tar/$FILE
+	rm -rf tmpextract
+	mkdir -p tmpextract
+	cd tmpextract
+	../tar/$FILE
+	cd ..
+	mv tmpextract/$TGT ${TGT}${SUFFIX}
+	rm -rf tmpextract
 fi
 
-rm -f jdk1.6
-ln -s $TGT jdk1.6
+rm -f jdk1.6${SUFFIX}
+ln -s $TGT jdk1.6${SUFFIX}
 
-rm -f latest
-ln -s $TGT latest
+rm -f latest${SUFFIX}
+ln -s $TGT latest${SUFFIX}
 
 rm -f /etc/profile.d/jdk.sh
 rm -f /etc/profile.d/java-home.sh
