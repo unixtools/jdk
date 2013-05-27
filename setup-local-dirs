@@ -6,12 +6,24 @@ BASE=http://download.oracle.com/otn-pub/java/jdk
 
 URL=$BASE/6u45-b06/jdk-6u45-linux-x64.bin
 FILE=`basename $URL`
-
-WGET='wget --no-cookies --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com"'
+TGT=jdk1.6.0_45
 
 if [ ! -e tar/$FILE ]; then
-$WGET $URL -O tar/$FILE
+	wget --no-cookies --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com" \
+	$URL -O tar/$FILE
 fi
+
+if [ ! -e $TGT ]; then
+	unset DISPLAY
+	chmod 755 tar/$FILE
+	./tar/$FILE
+fi
+
+rm -f jdk1.6
+ln -s $TGT jdk1.6
+
+rm -f latest
+ln -s $TGT latest
 
 rm -f /etc/profile.d/jdk.sh
 rm -f /etc/profile.d/java-home.sh
