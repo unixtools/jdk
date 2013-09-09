@@ -1,5 +1,6 @@
 #!/bin/sh -x
 
+cd /local/jdk
 mkdir -p tar
 
 GEN=6
@@ -48,6 +49,8 @@ ln -s $TGT jdk1.6${SUFFIX}
 
 rm -f latest${SUFFIX}
 ln -s $TGT latest${SUFFIX}
+
+./add-local-certs
 
 rm -f /etc/profile.d/jdk.sh
 rm -f /etc/profile.d/java-home.sh

@@ -1,0 +1,13 @@
+#!/bin/sh -x
+
+for f in /local/jdk/jdk*; do
+	for crt in /local/jdk/certs/*.crt; do
+	cbase=`basename $crt .crt`
+
+	$f/bin/keytool -import -trustcacerts \
+		-keystore $f/jre/lib/security/cacerts \
+		-storepass changeit -noprompt \
+		-alias $cbase -file $crt
+
+	done
+done
