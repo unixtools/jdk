@@ -1,14 +1,23 @@
-#!/bin/sh -x
+#!/bin/sh
 
 cd /local/jdk
 mkdir -p tar
 
-GEN=6
-BITS=64
+WHICH="$1"
+if [ "$WHICH" == "" ]; then
+	echo "Usage: $0 [6-32|6-64|7-64]"
+	exit 1
+fi
 
 BASE=http://download.oracle.com/otn-pub/java/jdk
 
-case "$GEN-$BITS" in
+case "$WHICH" in
+	7-64)
+		URL=$BASE/7u45-b18/jdk-7u45-linux-x64.tar.gz
+		FILE=`basename $URL`
+		TGT=jdk1.7.0_45
+		SUFFIX=""
+		;;
 	6-64)
 		URL=$BASE/6u45-b06/jdk-6u45-linux-x64.bin
 		FILE=`basename $URL`
@@ -38,14 +47,29 @@ if [ ! -e "${TGT}${SUFFIX}" ]; then
 	rm -rf tmpextract
 	mkdir -p tmpextract
 	cd tmpextract
-	../tar/$FILE
+	case $FILE in
+		*.bin)
+			../tar/$FILE
+			;;
+		*.tar.gz)
+			tar -xzf ../tar/$FILE
+			;;
+	esac
 	cd ..
 	mv tmpextract/$TGT ${TGT}${SUFFIX}
 	rm -rf tmpextract
 fi
 
-rm -f jdk1.6${SUFFIX}
-ln -s $TGT jdk1.6${SUFFIX}
+case $FILE in
+	*1.7*)
+		rm -f jdk1.6${SUFFIX}
+		ln -s $TGT jdk1.6${SUFFIX}
+		;;
+	*1.7*)
+		rm -f jdk1.7${SUFFIX}
+		ln -s $TGT jdk1.7${SUFFIX}
+		;;
+esac
 
 rm -f latest${SUFFIX}
 ln -s $TGT latest${SUFFIX}

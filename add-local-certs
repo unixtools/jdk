@@ -1,4 +1,4 @@
-#!/bin/sh -x
+#!/bin/sh
 
 for f in /local/jdk/jdk*; do
 	for crt in /local/jdk/certs/*.crt; do
