@@ -47,12 +47,12 @@ case "$WHICH" in
 esac
 
 if [ ! -e tar/$FILE ]; then
-	wget --no-cookies --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com" \
+	wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
 	$URL -O tar/$FILE
 fi
 
 if [ ! -e tar/$CRYPTO_FILE ]; then
-	wget --no-cookies --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com" \
+	wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
 	$CRYPTO_URL -O tar/$CRYPTO_FILE
 fi
 
