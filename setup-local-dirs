@@ -5,8 +5,9 @@ mkdir -p tar
 
 WHICH="$1"
 if [ "$WHICH" == "" ]; then
-	echo "Usage: $0 [6-32|6-64|7-64]"
-	exit 1
+	#echo "Usage: $0 [7-64]"
+	#exit 1
+	WHICH="7-64"
 fi
 
 BASE=http://download.oracle.com/otn-pub/java/jdk
@@ -19,24 +20,6 @@ case "$WHICH" in
 		TGT=jdk1.7.0_55
 		SUFFIX=""
 		CRYPTO_URL=$CRYPTO_BASE/7/UnlimitedJCEPolicyJDK7.zip
-		CRYPTO_FILE=`basename $CRYPTO_URL`
-		CRYPTO_TGT=UnlimitedJCEPolicy
-		;;
-	6-64)
-		URL=$BASE/6u45-b06/jdk-6u45-linux-x64.bin
-		FILE=`basename $URL`
-		TGT=jdk1.6.0_45
-		SUFFIX=""
-		CRYPTO_URL=$CRYPTO_BASE/6/UnlimitedJCEPolicyJDK6.zip
-		CRYPTO_FILE=`basename $CRYPTO_URL`
-		CRYPTO_TGT=UnlimitedJCEPolicy
-		;;
-	6-32)
-		URL=$BASE/6u45-b06/jdk-6u45-linux-i586.bin
-		FILE=`basename $URL`
-		TGT=jdk1.6.0_45
-		SUFFIX="-32bit"
-		CRYPTO_URL=$CRYPTO_BASE/6/UnlimitedJCEPolicyJDK6.zip
 		CRYPTO_FILE=`basename $CRYPTO_URL`
 		CRYPTO_TGT=UnlimitedJCEPolicy
 		;;
