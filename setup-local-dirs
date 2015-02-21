@@ -125,9 +125,11 @@ rm -rf tmpextract
 
 ./add-local-certs
 
+if [ -e /etc/profile.d ]; then
 rm -f /etc/profile.d/jdk.sh
 rm -f /etc/profile.d/java-home.sh
 cp java-home.sh /etc/profile.d/java-home.sh
 chmod 755 /etc/profile.d/java-home.sh
+fi
 
 chown -R root:root /local/jdk
