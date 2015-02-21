@@ -65,12 +65,12 @@ fi
 else
 
 if [ ! -e tar/$FILE ]; then
-	curl -H "Cookie: oraclelicense=accept-securebackup-cookie" \
+	curl -L -H "Cookie: oraclelicense=accept-securebackup-cookie" \
 	$URL -o tar/$FILE
 fi
 
 if [ ! -e tar/$CRYPTO_FILE ]; then
-	curl -H "Cookie: oraclelicense=accept-securebackup-cookie" \
+	curl -L -H "Cookie: oraclelicense=accept-securebackup-cookie" \
 	$CRYPTO_URL -o tar/$CRYPTO_FILE
 fi
 
