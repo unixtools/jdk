@@ -51,6 +51,7 @@ case "$WHICH" in
 		;;
 esac
 
+if [ ! -e /usr/bin/curl ]; then
 if [ ! -e tar/$FILE ]; then
 	wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
 	$URL -O tar/$FILE
@@ -60,6 +61,21 @@ if [ ! -e tar/$CRYPTO_FILE ]; then
 	wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
 	$CRYPTO_URL -O tar/$CRYPTO_FILE
 fi
+
+else
+
+if [ ! -e tar/$FILE ]; then
+	curl -H "Cookie: oraclelicense=accept-securebackup-cookie" \
+	$URL -o tar/$FILE
+fi
+
+if [ ! -e tar/$CRYPTO_FILE ]; then
+	curl -H "Cookie: oraclelicense=accept-securebackup-cookie" \
+	$CRYPTO_URL -o tar/$CRYPTO_FILE
+fi
+
+fi
+
 
 if [ ! -e "${TGT}${SUFFIX}" ]; then
 	unset DISPLAY
@@ -81,11 +97,15 @@ if [ ! -e "${TGT}${SUFFIX}" ]; then
 fi
 
 case $FILE in
-	*1.7*)
+	*1.6*)
 		rm -f jdk1.6${SUFFIX}
 		ln -s $TGT jdk1.6${SUFFIX}
 		;;
 	*1.7*)
+		rm -f jdk1.7${SUFFIX}
+		ln -s $TGT jdk1.7${SUFFIX}
+		;;
+	*1.8*)
 		rm -f jdk1.7${SUFFIX}
 		ln -s $TGT jdk1.7${SUFFIX}
 		;;
