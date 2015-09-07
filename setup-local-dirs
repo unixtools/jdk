@@ -1,13 +1,14 @@
 #!/bin/sh
 
+umask 077
 cd /local/jdk
 mkdir -p tar
 
 WHICH="$1"
 if [ "$WHICH" == "" ]; then
-	#echo "Usage: $0 [7-64]"
+	#echo "Usage: $0 [7-64|8-64]"
 	#exit 1
-	WHICH="7-64"
+	WHICH="8-64"
 fi
 
 BASE=http://download.oracle.com/otn-pub/java/jdk
@@ -133,3 +134,4 @@ chmod 755 /etc/profile.d/java-home.sh
 fi
 
 chown -R root:root /local/jdk
+chmod -R ugo+rX /local/jdk
