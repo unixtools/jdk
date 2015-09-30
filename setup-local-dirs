@@ -19,7 +19,7 @@ case "$WHICH" in
 		# http://download.oracle.com/otn-pub/java/jdk/8u45-b13/jdk-8u45-linux-x64.tar.gz
 		URL=$BASE/8u60-b27/jdk-8u60-linux-x64.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk1.8.0_51
+		TGT=jdk1.8.0_60
 		SUFFIX=""
 		# http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
 		CRYPTO_URL=$CRYPTO_BASE/8/jce_policy-8.zip
