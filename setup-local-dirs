@@ -31,7 +31,7 @@ case "$WHICH" in
 		URL=$BASE/8u60-b27/jdk-8u60-linux-i586.tar.gz
 		FILE=`basename $URL`
 		TGT=jdk1.8.0_60
-		SUFFIX=""
+		SUFFIX="-32"
 		# http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
 		CRYPTO_URL=$CRYPTO_BASE/8/jce_policy-8.zip
 		CRYPTO_FILE=`basename $CRYPTO_URL`
@@ -98,10 +98,6 @@ if [ ! -e "${TGT}${SUFFIX}" ]; then
 fi
 
 case $FILE in
-	*1.6*)
-		rm -f jdk1.6${SUFFIX}
-		ln -s $TGT jdk1.6${SUFFIX}
-		;;
 	*1.7*)
 		rm -f jdk1.7${SUFFIX}
 		ln -s $TGT jdk1.7${SUFFIX}
