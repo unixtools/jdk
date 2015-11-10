@@ -16,10 +16,10 @@ CRYPTO_BASE=http://download.oracle.com/otn-pub/java/jce
 
 case "$WHICH" in
 	8-64)
-		# http://download.oracle.com/otn-pub/java/jdk/8u45-b13/jdk-8u45-linux-x64.tar.gz
-		URL=$BASE/8u60-b27/jdk-8u60-linux-x64.tar.gz
+		# http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.tar.gz
+		URL=$BASE/8u65-b17/jdk-8u65-linux-x64.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk1.8.0_60
+		TGT=jdk1.8.0_65
 		SUFFIX=""
 		# http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
 		CRYPTO_URL=$CRYPTO_BASE/8/jce_policy-8.zip
@@ -27,10 +27,10 @@ case "$WHICH" in
 		CRYPTO_TGT=UnlimitedJCEPolicyJDK8
 		;;
 	8-32)
-		# http://download.oracle.com/otn-pub/java/jdk/8u45-b13/jdk-8u45-linux-i586.tar.gz
-		URL=$BASE/8u60-b27/jdk-8u60-linux-i586.tar.gz
+		# http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-i586.tar.gz
+		URL=$BASE/8u65-b17/jdk-8u65-linux-i586.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk1.8.0_60
+		TGT=jdk1.8.0_65
 		SUFFIX="-32"
 		# http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
 		CRYPTO_URL=$CRYPTO_BASE/8/jce_policy-8.zip
