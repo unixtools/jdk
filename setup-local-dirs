@@ -5,11 +5,12 @@ cd /local/jdk
 mkdir -p tar
 
 WHICH="$1"
-if [ "$WHICH" == "" ]; then
+if [ "x$WHICH" = "x" ]; then
 	#echo "Usage: $0 [7-64|8-64]"
 	#exit 1
 	WHICH="8-64"
 fi
+echo "Setting up for: $WHICH"
 
 BASE=http://download.oracle.com/otn-pub/java/jdk
 CRYPTO_BASE=http://download.oracle.com/otn-pub/java/jce
