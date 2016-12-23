@@ -19,9 +19,9 @@ case "$WHICH" in
 	8-64)
 		# http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-x64.tar.gz
 		# http://download.oracle.com/otn-pub/java/jdk/8u91-b14/jdk-8u91-linux-i586.tar.gz
-		URL=$BASE/8u102-b14/jdk-8u102-linux-x64.tar.gz
+		URL=$BASE/8u112-b15/jdk-8u112-linux-x64.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk1.8.0_102
+		TGT=jdk1.8.0_112
 		SUFFIX=""
 		# http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
 		CRYPTO_URL=$CRYPTO_BASE/8/jce_policy-8.zip
@@ -30,9 +30,9 @@ case "$WHICH" in
 		;;
 	8-32)
 		# http://download.oracle.com/otn-pub/java/jdk/8u65-b17/jdk-8u65-linux-i586.tar.gz
-		URL=$BASE/8u102-b14/jdk-8u102-linux-i586.tar.gz
+		URL=$BASE/8u112-b15/jdk-8u112-linux-i586.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk1.8.0_102
+		TGT=jdk1.8.0_112
 		SUFFIX="-32"
 		# http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
 		CRYPTO_URL=$CRYPTO_BASE/8/jce_policy-8.zip
