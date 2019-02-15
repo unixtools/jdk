@@ -15,6 +15,12 @@ echo "Setting up for: $WHICH"
 CRYPTO_BASE=http://download.oracle.com/otn-pub/java/jce
 
 case "$WHICH" in
+	11-64)
+		URL=https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.2%2B9/OpenJDK11U-jdk_x64_linux_hotspot_11.0.2_9.tar.gz
+		FILE=`basename $URL`
+		TGT=jdk-11.0.2+9
+		SUFFIX=""
+		;;
 	8-64)
 		URL=http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz
 		FILE=`basename $URL`
@@ -37,6 +43,7 @@ if [ ! -e tar/$FILE ]; then
 	$URL -O tar/$FILE
 fi
 
+if [ "x$CRYPTO_FILE" != "x" ]; then
 if [ ! -e tar/$CRYPTO_FILE ]; then
 	wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
 	$CRYPTO_URL -O tar/$CRYPTO_FILE
@@ -53,7 +60,7 @@ if [ ! -e tar/$CRYPTO_FILE ]; then
 	curl -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" \
 	$CRYPTO_URL -o tar/$CRYPTO_FILE
 fi
-
+fi
 fi
 
 
@@ -90,6 +97,7 @@ esac
 rm -f latest${SUFFIX}
 ln -s $TGT latest${SUFFIX}
 
+if [ "x$CRYPTO_FILE" != "x" ]; then
 echo "Installing crypto policy extensions..."
 rm -rf tmpextract
 mkdir -p tmpextract
@@ -98,6 +106,7 @@ unzip ../tar/$CRYPTO_FILE
 cd ..
 cp tmpextract/$CRYPTO_TGT/* /local/jdk/$TGT/jre/lib/security/
 rm -rf tmpextract
+fi
 
 ./add-local-certs
 

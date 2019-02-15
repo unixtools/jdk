@@ -2,12 +2,15 @@
 
 for f in /local/jdk/jdk*; do
 	for crt in /local/jdk/certs/*.crt; do
-	cbase=`basename $crt .crt`
+		cbase=`basename $crt .crt`
 
-	$f/bin/keytool -import -trustcacerts \
-		-keystore $f/jre/lib/security/cacerts \
-		-storepass changeit -noprompt \
-		-alias $cbase -file $crt
-
+		for cafile in $f/jre/lib/security/cacerts $f/lib/security/cacerts ]; do
+			if [ -e $cafile ]; then
+				$f/bin/keytool -import -trustcacerts \
+					-keystore $cafile \
+					-storepass changeit -noprompt \
+					-alias $cbase -file $crt
+			fi
+		done
 	done
 done
