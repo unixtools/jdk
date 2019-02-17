@@ -20,13 +20,13 @@ case "$WHICH" in
 		TGT=jdk-11.0.2+9
 		SUFFIX=""
 		;;
-	open8-64)
+	8-64)
 		URL=https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u202-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u202b08.tar.gz
 		FILE=`basename $URL`
 		TGT=jdk8u202-b08
 		SUFFIX=""
 		;;
-	8-64)
+	oracle8-64)
 		URL=http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz
 		FILE=`basename $URL`
 		TGT=jdk1.8.0_181
@@ -50,10 +50,10 @@ if [ ! -e /usr/bin/curl ]; then
 	fi
 
 	if [ "x$CRYPTO_FILE" != "x" ]; then
-	if [ ! -e tar/$CRYPTO_FILE ]; then
-		wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-		$CRYPTO_URL -O tar/$CRYPTO_FILE
-	fi
+		if [ ! -e tar/$CRYPTO_FILE ]; then
+			wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
+			$CRYPTO_URL -O tar/$CRYPTO_FILE
+		fi
 	fi
 
 else
@@ -64,10 +64,10 @@ else
 	fi
 
 	if [ "x$CRYPTO_FILE" != "x" ]; then
-	if [ ! -e tar/$CRYPTO_FILE ]; then
-		curl -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" \
-		$CRYPTO_URL -o tar/$CRYPTO_FILE
-	fi
+		if [ ! -e tar/$CRYPTO_FILE ]; then
+			curl -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" \
+			$CRYPTO_URL -o tar/$CRYPTO_FILE
+		fi
 	fi
 fi
 
@@ -91,38 +91,27 @@ if [ ! -e "${TGT}${SUFFIX}" ]; then
 	rm -rf tmpextract
 fi
 
-case $FILE in
-	*1.7*)
-		rm -f jdk1.7${SUFFIX}
-		ln -s $TGT jdk1.7${SUFFIX}
-		;;
-	*1.8*)
-		rm -f jdk1.7${SUFFIX}
-		ln -s $TGT jdk1.7${SUFFIX}
-		;;
-esac
-
 rm -f latest${SUFFIX}
 ln -s $TGT latest${SUFFIX}
 
 if [ "x$CRYPTO_FILE" != "x" ]; then
-echo "Installing crypto policy extensions..."
-rm -rf tmpextract
-mkdir -p tmpextract
-cd tmpextract
-unzip ../tar/$CRYPTO_FILE
-cd ..
-cp tmpextract/$CRYPTO_TGT/* /local/jdk/$TGT/jre/lib/security/
-rm -rf tmpextract
+	echo "Installing crypto policy extensions..."
+	rm -rf tmpextract
+	mkdir -p tmpextract
+	cd tmpextract
+	unzip ../tar/$CRYPTO_FILE
+	cd ..
+	cp tmpextract/$CRYPTO_TGT/* /local/jdk/$TGT/jre/lib/security/
+	rm -rf tmpextract
 fi
 
 ./add-local-certs
 
 if [ -e /etc/profile.d ]; then
-rm -f /etc/profile.d/jdk.sh
-rm -f /etc/profile.d/java-home.sh
-cp java-home.sh /etc/profile.d/java-home.sh
-chmod 755 /etc/profile.d/java-home.sh
+	rm -f /etc/profile.d/jdk.sh
+	rm -f /etc/profile.d/java-home.sh
+	cp java-home.sh /etc/profile.d/java-home.sh
+	chmod 755 /etc/profile.d/java-home.sh
 fi
 
 chown -R root:root /local/jdk
