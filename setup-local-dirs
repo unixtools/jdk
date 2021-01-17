@@ -8,7 +8,7 @@ WHICH="$1"
 if [ "x$WHICH" = "x" ]; then
 	#echo "Usage: $0 [7-64|8-64]"
 	#exit 1
-	WHICH="8-64"
+	WHICH="11-64"
 fi
 echo "Setting up for: $WHICH"
 
