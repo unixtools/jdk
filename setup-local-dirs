@@ -15,10 +15,10 @@ echo "Setting up for: $WHICH"
 
 case "$WHICH" in
 	11-64)
-		URL=https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.15%2B10/OpenJDK11U-jdk_x64_linux_hotspot_11.0.15_10.tar.gz
 		URL=https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.19%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.19_7.tar.gz
+		URL=https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.20.1%2B1/OpenJDK11U-jdk_x64_linux_hotspot_11.0.20.1_1.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk-11.0.19+7
+		TGT=jdk-11.0.20.1+1
 		SUFFIX=""
 		;;
 	8-64)
