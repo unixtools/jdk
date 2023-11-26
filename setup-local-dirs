@@ -6,16 +6,21 @@ mkdir -p tar
 
 WHICH="$1"
 if [ "x$WHICH" = "x" ]; then
-	#echo "Usage: $0 [7-64|8-64]"
+	#echo "Usage: $0 [8-64|11-64|21-64]"
 	#exit 1
-	WHICH="11-64"
+	WHICH="21-64"
 fi
 echo "Setting up for: $WHICH"
 
 
 case "$WHICH" in
+	21-64)
+		URL=https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.1%2B12/OpenJDK21U-jdk_x64_linux_hotspot_21.0.1_12.tar.gz
+		FILE=`basename $URL`
+		TGT=jdk-21.0.1+12
+		SUFFIX=""
+		;;
 	11-64)
-		URL=https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.19%2B7/OpenJDK11U-jdk_x64_linux_hotspot_11.0.19_7.tar.gz
 		URL=https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.20.1%2B1/OpenJDK11U-jdk_x64_linux_hotspot_11.0.20.1_1.tar.gz
 		FILE=`basename $URL`
 		TGT=jdk-11.0.20.1+1
