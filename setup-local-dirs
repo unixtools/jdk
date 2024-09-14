@@ -21,9 +21,9 @@ case "$WHICH" in
 		SUFFIX=""
 		;;
 	17-64)
-		URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.11%2B9/OpenJDK17U-jdk_x64_linux_hotspot_17.0.11_9.tar.gz
+		URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.12%2B7/OpenJDK17U-jdk_x64_linux_hotspot_17.0.12_7.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk-17.0.11+9
+		TGT=jdk-17.0.12+7
 		SUFFIX=""
 		;;
 	11-64)
