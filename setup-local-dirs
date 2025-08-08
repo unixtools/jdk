@@ -15,39 +15,32 @@ echo "Setting up for: $WHICH"
 
 case "$WHICH" in
 	21-64)
-		URL=https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.1%2B12/OpenJDK21U-jdk_x64_linux_hotspot_21.0.1_12.tar.gz
+		URL=https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.8%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.8_9.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk-21.0.1+12
+		TGT=jdk-21.0.8+9
 		SUFFIX=""
+		VSUFFIX=21
 		;;
 	17-64)
-		URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.12%2B7/OpenJDK17U-jdk_x64_linux_hotspot_17.0.12_7.tar.gz
+		URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.16%2B8/OpenJDK17U-jdk_x64_linux_hotspot_17.0.16_8.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk-17.0.12+7
+		TGT=jdk-17.0.16+8
 		SUFFIX=""
+		VSUFFIX=17
 		;;
 	11-64)
-		URL=https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.23%2B9/OpenJDK11U-jdk_x64_linux_hotspot_11.0.23_9.tar.gz
+		URL=https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.28%2B6/OpenJDK11U-jdk_x64_linux_hotspot_11.0.28_6.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk-11.0.23+9
+		TGT=jdk-11.0.28+6
 		SUFFIX=""
+		VSUFFIX=11
 		;;
 	8-64)
-		URL=https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u332-b09/OpenJDK8U-jdk_x64_linux_hotspot_8u332b09.tar.gz
+		URL=https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u462-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u462b08.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk8u332-b09
+		TGT=jdk8u462-b08
 		SUFFIX=""
-		;;
-	oracle8-64)
-		URL=http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz
-		FILE=`basename $URL`
-		TGT=jdk1.8.0_181
-		SUFFIX=""
-		# http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip
-		CRYPTO_BASE=http://download.oracle.com/otn-pub/java/jce
-		CRYPTO_URL=$CRYPTO_BASE/8/jce_policy-8.zip
-		CRYPTO_FILE=`basename $CRYPTO_URL`
-		CRYPTO_TGT=UnlimitedJCEPolicyJDK8
+		VSUFFIX=8
 		;;
 	*)
 		echo "Undefined gen-bits."
@@ -57,29 +50,13 @@ esac
 
 if [ ! -e /usr/bin/curl ]; then
 	if [ ! -e tar/$FILE ]; then
-		wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-		$URL -O tar/$FILE
-	fi
-
-	if [ "x$CRYPTO_FILE" != "x" ]; then
-		if [ ! -e tar/$CRYPTO_FILE ]; then
-			wget --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" \
-			$CRYPTO_URL -O tar/$CRYPTO_FILE
-		fi
+		wget --no-cookies $URL -O tar/$FILE
 	fi
 
 else
 
 	if [ ! -e tar/$FILE ]; then
-		curl -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" \
-		$URL -o tar/$FILE
-	fi
-
-	if [ "x$CRYPTO_FILE" != "x" ]; then
-		if [ ! -e tar/$CRYPTO_FILE ]; then
-			curl -k -L -H "Cookie: oraclelicense=accept-securebackup-cookie" \
-			$CRYPTO_URL -o tar/$CRYPTO_FILE
-		fi
+		curl -k -L $URL -o tar/$FILE
 	fi
 fi
 
@@ -106,16 +83,8 @@ fi
 rm -f latest${SUFFIX}
 ln -s $TGT latest${SUFFIX}
 
-if [ "x$CRYPTO_FILE" != "x" ]; then
-	echo "Installing crypto policy extensions..."
-	rm -rf tmpextract
-	mkdir -p tmpextract
-	cd tmpextract
-	unzip ../tar/$CRYPTO_FILE
-	cd ..
-	cp tmpextract/$CRYPTO_TGT/* /local/jdk/$TGT/jre/lib/security/
-	rm -rf tmpextract
-fi
+rm -f latest-${VSUFFIX}
+ln -s $TGT latest-${VSUFFIX}
 
 ./add-local-certs
 
