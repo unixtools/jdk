@@ -50,7 +50,7 @@ esac
 
 if [ ! -e /usr/bin/curl ]; then
 	if [ ! -e tar/$FILE ]; then
-		wget --no-cookies $URL -O tar/$FILE
+		wget --progress=dot:mega --no-cookies $URL -O tar/$FILE
 	fi
 
 else
