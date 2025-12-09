@@ -15,16 +15,16 @@ echo "Setting up for: $WHICH"
 
 case "$WHICH" in
 	21-64)
-		URL=https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.8%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.8_9.tar.gz
+		URL=https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.9%2B10/OpenJDK21U-jdk_x64_linux_hotspot_21.0.9_10.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk-21.0.8+9
+		TGT=jdk-21.0.9+10
 		SUFFIX=""
 		VSUFFIX=21
 		;;
 	17-64)
-		URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.16%2B8/OpenJDK17U-jdk_x64_linux_hotspot_17.0.16_8.tar.gz
+		URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.17%2B10/OpenJDK17U-jdk_x64_linux_hotspot_17.0.17_10.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk-17.0.16+8
+		TGT=jdk-17.0.17+10
 		SUFFIX=""
 		VSUFFIX=17
 		;;
