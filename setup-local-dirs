@@ -15,30 +15,30 @@ echo "Setting up for: $WHICH"
 
 case "$WHICH" in
 	21-64)
-		URL=https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.10%2B7/OpenJDK21U-jdk_x64_linux_hotspot_21.0.10_7.tar.gz
+		URL=https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12%2B8/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12_8.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk-21.0.10+7
+		TGT=jdk-21.0.12+8
 		SUFFIX=""
 		VSUFFIX=21
 		;;
 	17-64)
-		URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.17%2B10/OpenJDK17U-jdk_x64_linux_hotspot_17.0.17_10.tar.gz
+		URL=https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.20%2B8/OpenJDK17U-jdk_x64_linux_hotspot_17.0.20_8.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk-17.0.17+10
+		TGT=jdk-17.0.20+8
 		SUFFIX=""
 		VSUFFIX=17
 		;;
 	11-64)
-		URL=https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.28%2B6/OpenJDK11U-jdk_x64_linux_hotspot_11.0.28_6.tar.gz
+		URL=https://github.com/adoptium/temurin11-binaries/releases/download/jdk-11.0.32%2B9/OpenJDK11U-jdk_x64_linux_hotspot_11.0.32_9.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk-11.0.28+6
+		TGT=jdk-11.0.32+9
 		SUFFIX=""
 		VSUFFIX=11
 		;;
 	8-64)
-		URL=https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u462-b08/OpenJDK8U-jdk_x64_linux_hotspot_8u462b08.tar.gz
+		URL=https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u502-b07/OpenJDK8U-jdk_x64_linux_hotspot_8u502b07.tar.gz
 		FILE=`basename $URL`
-		TGT=jdk8u462-b08
+		TGT=jdk8u502-b07
 		SUFFIX=""
 		VSUFFIX=8
 		;;
